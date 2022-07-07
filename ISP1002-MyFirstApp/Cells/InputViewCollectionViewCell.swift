@@ -11,8 +11,14 @@ class InputViewCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var inputViewLabel: UILabel!
     
+    // MARK: - Cell Initialiser
     override class func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    // MARK: - Setup Cell
+    func setupCell(item: InputType) {
+        inputViewLabel.text = item.rawValue
     }
     
 }

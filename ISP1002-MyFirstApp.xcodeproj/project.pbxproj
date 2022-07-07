@@ -14,6 +14,7 @@
 		07F5CFD728776496008C24E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07F5CFD628776496008C24E1 /* Assets.xcassets */; };
 		07F5CFDA28776496008C24E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07F5CFD828776496008C24E1 /* LaunchScreen.storyboard */; };
 		07F5CFE528776BB6008C24E1 /* InputViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F5CFE428776BB6008C24E1 /* InputViewCollectionViewCell.swift */; };
+		07F5CFE828777330008C24E1 /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F5CFE728777330008C24E1 /* CalculatorViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		07F5CFD928776496008C24E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		07F5CFDB28776496008C24E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07F5CFE428776BB6008C24E1 /* InputViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewCollectionViewCell.swift; sourceTree = "<group>"; };
+		07F5CFE728777330008C24E1 /* CalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		07F5CFCC28776493008C24E1 /* ISP1002-MyFirstApp */ = {
 			isa = PBXGroup;
 			children = (
+				07F5CFE62877731C008C24E1 /* ViewModels */,
 				07F5CFE128776B5B008C24E1 /* Cells */,
 				07F5CFCD28776493008C24E1 /* AppDelegate.swift */,
 				07F5CFCF28776493008C24E1 /* SceneDelegate.swift */,
@@ -76,6 +79,14 @@
 				07F5CFE428776BB6008C24E1 /* InputViewCollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		07F5CFE62877731C008C24E1 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				07F5CFE728777330008C24E1 /* CalculatorViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +164,7 @@
 				07F5CFCE28776493008C24E1 /* AppDelegate.swift in Sources */,
 				07F5CFE528776BB6008C24E1 /* InputViewCollectionViewCell.swift in Sources */,
 				07F5CFD028776493008C24E1 /* SceneDelegate.swift in Sources */,
+				07F5CFE828777330008C24E1 /* CalculatorViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
