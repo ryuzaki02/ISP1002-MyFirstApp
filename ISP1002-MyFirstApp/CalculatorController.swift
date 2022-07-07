@@ -8,6 +8,9 @@
 import UIKit
 
 class CalculatorController: UIViewController {
+    
+    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var inputLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
