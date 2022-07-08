@@ -10,14 +10,16 @@ import UIKit
 class InputViewCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var inputViewLabel: UILabel!
+    @IBOutlet var parentView: UIView!
     
-    // MARK: - Cell Initialiser
-    override class func awakeFromNib() {
+    override func awakeFromNib() {
         super.awakeFromNib()
     }
     
     // MARK: - Setup Cell
     func setupCell(item: InputType) {
+        layer.cornerRadius = bounds.size.height / 2
+        backgroundColor = item.buttonType == .number ? UIColor.lightGray : UIColor.orange
         inputViewLabel.text = item.rawValue
     }
     

@@ -23,24 +23,24 @@
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="163.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGI-dn-HeU">
-                                                <rect key="frame" x="0.0" y="114.5" width="384" height="49"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                                <rect key="frame" x="0.0" y="78" width="379" height="65.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="70"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="OGI-dn-HeU" secondAttribute="bottom" id="3Hy-DX-cGv"/>
-                                            <constraint firstItem="OGI-dn-HeU" firstAttribute="height" secondItem="G5h-zA-hE1" secondAttribute="height" multiplier="0.3" id="LfY-QM-oxL"/>
+                                            <constraint firstAttribute="bottom" secondItem="OGI-dn-HeU" secondAttribute="bottom" constant="20" id="3Hy-DX-cGv"/>
+                                            <constraint firstItem="OGI-dn-HeU" firstAttribute="height" secondItem="G5h-zA-hE1" secondAttribute="height" multiplier="0.4" id="LfY-QM-oxL"/>
                                             <constraint firstItem="OGI-dn-HeU" firstAttribute="leading" secondItem="G5h-zA-hE1" secondAttribute="leading" id="XKw-Wf-O55"/>
-                                            <constraint firstAttribute="trailing" secondItem="OGI-dn-HeU" secondAttribute="trailing" id="v88-ps-Eyp"/>
+                                            <constraint firstAttribute="trailing" secondItem="OGI-dn-HeU" secondAttribute="trailing" constant="5" id="v88-ps-Eyp"/>
                                         </constraints>
                                     </view>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qQ5-tC-Agg">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qQ5-tC-Agg">
                                         <rect key="frame" x="0.0" y="163.5" width="384" height="654.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="t5O-yV-UMP">
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="t5O-yV-UMP">
                                             <size key="itemSize" width="128" height="128"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -48,28 +48,40 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InputViewCollectionViewCell" id="z0p-VR-J7G" customClass="InputViewCollectionViewCell" customModule="ISP1002_MyFirstApp" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="i5q-uT-xp5">
-                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNc-oW-T5t">
-                                                            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e8j-zw-cLJ">
+                                                            <rect key="frame" x="5" y="5" width="118" height="118"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="854-IC-sHq">
+                                                                    <rect key="frame" x="59" y="59" width="0.0" height="0.0"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstItem="854-IC-sHq" firstAttribute="centerX" secondItem="e8j-zw-cLJ" secondAttribute="centerX" id="BiO-LC-Qpl"/>
+                                                                <constraint firstItem="854-IC-sHq" firstAttribute="centerY" secondItem="e8j-zw-cLJ" secondAttribute="centerY" id="u5g-s8-wbA"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="xNc-oW-T5t" firstAttribute="leading" secondItem="i5q-uT-xp5" secondAttribute="leading" id="MKX-7S-9jd"/>
-                                                        <constraint firstAttribute="bottom" secondItem="xNc-oW-T5t" secondAttribute="bottom" id="fgK-PQ-dj1"/>
-                                                        <constraint firstAttribute="trailing" secondItem="xNc-oW-T5t" secondAttribute="trailing" id="hU3-hu-vsN"/>
-                                                        <constraint firstItem="xNc-oW-T5t" firstAttribute="top" secondItem="i5q-uT-xp5" secondAttribute="top" id="t0l-rc-gRJ"/>
+                                                        <constraint firstAttribute="bottom" secondItem="e8j-zw-cLJ" secondAttribute="bottom" constant="5" id="1he-HW-Zux"/>
+                                                        <constraint firstAttribute="trailing" secondItem="e8j-zw-cLJ" secondAttribute="trailing" constant="5" id="EQT-ft-vtW"/>
+                                                        <constraint firstItem="e8j-zw-cLJ" firstAttribute="leading" secondItem="i5q-uT-xp5" secondAttribute="leading" constant="5" id="X5U-Hh-apm"/>
+                                                        <constraint firstItem="e8j-zw-cLJ" firstAttribute="top" secondItem="i5q-uT-xp5" secondAttribute="top" constant="5" id="eQm-U7-t3G"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
                                                 <connections>
-                                                    <outlet property="inputViewLabel" destination="xNc-oW-T5t" id="QET-j5-Szo"/>
+                                                    <outlet property="inputViewLabel" destination="854-IC-sHq" id="SPL-jd-3JP"/>
+                                                    <outlet property="parentView" destination="e8j-zw-cLJ" id="efl-YV-jOM"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
