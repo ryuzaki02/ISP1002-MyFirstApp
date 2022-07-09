@@ -9,12 +9,17 @@ import UIKit
 
 class CalculatorController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    // Iboutlets
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var inputLabel: UILabel!
     
+    // Cell identifier
     let cellReuseIdentifier = "InputViewCollectionViewCell"
+    // View model for controller intialised
     var calculatorViewModel = CalculatorViewModel()
-
+    
+    // MARK: - View life cycle
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
@@ -28,7 +33,8 @@ class CalculatorController: UIViewController, UICollectionViewDelegate, UICollec
         collectionView.dataSource = self
     }
     
-    //MARK: - Collection view delegate methods
+    // MARK: - Collection view delegate methods
+    //
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let inputType = calculatorViewModel.items[indexPath.row]
         let currentAction = inputType.buttonType
@@ -87,9 +93,11 @@ class CalculatorController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     
-    //MARK: - Collection view data source methods
+    // MARK: - Collection view data source methods
+    //
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! InputViewCollectionViewCell
+        // Setup cell according to current item and view model
         cell.setupCell(item: calculatorViewModel.items[indexPath.row], viewModel: calculatorViewModel)
         return cell
     }
@@ -99,6 +107,7 @@ class CalculatorController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Provides custom height width according to device
         let size = (UIScreen.main.bounds.size.width - 85) / 4
         return CGSize(width: size, height: size)
     }

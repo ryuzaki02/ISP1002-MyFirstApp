@@ -7,10 +7,14 @@
 
 import Foundation
 
+// Enum: To differentiate sub type of Input type
+//
 enum ButtonType {
     case number, operation, equal, clear
 }
 
+// Enum: Input type enums to store all numbers and operations
+//
 enum InputType: String, CaseIterable {
     case AC = "AC"
     case PlusMinus = "+/-"
@@ -41,6 +45,8 @@ enum InputType: String, CaseIterable {
     case decimal = "."
     case equals = "="
     
+    // Computed variable to return sub type of particular input type
+    //
     var buttonType: ButtonType {
         switch self {
         case .one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .zero, .decimal, .dZero:
@@ -55,7 +61,10 @@ enum InputType: String, CaseIterable {
     }
 }
 
+// View model for view controller for business logic
+//
 struct CalculatorViewModel {
+    // Computed variable to return all input types
     var items: [InputType] {
         return InputType.allCases
     }
@@ -66,6 +75,10 @@ struct CalculatorViewModel {
     var lastAction: ButtonType?
     var operation: InputType?
     
+    // Mutating function to perform selected operation
+    // Return: Double type output value
+    // Argument: Checks whether single operation on first number or operation on both first and second number
+    //
     mutating func operate(singleOperation: Bool = false) -> Double {
         guard let firstNumber = firstNumber,
               let operation = operation
@@ -121,6 +134,9 @@ struct CalculatorViewModel {
         return value
     }
     
+    // Function that checks whether particular operation is single or not
+    // Return : Boolean variable
+    //
     func isSingleOperation() -> Bool {
         switch operation {
         case .tenPowerX, .ln, .sin, .cos, .square, .cube, .factorial, .by, .decimal:
@@ -130,6 +146,10 @@ struct CalculatorViewModel {
         }
     }
     
+    // Function that calculates factorial of input number
+    // Return : Integer Calculated factorial value
+    // Param: Integer input number
+    //
     private func factorial(_ number: Int) -> Int {
         let factorialNumber = Int(number)
         if factorialNumber == 0 {
@@ -139,14 +159,16 @@ struct CalculatorViewModel {
         }
     }
     
+    // Function that removes extra trailing zeroes
+    // Return: String output value to show
+    // Param: Double input value to convert
+    //
     func forTrailingZero(temp: Double) -> String {
         return String(format: "%g", temp)
     }
     
-    private func rad2deg(_ number: Double) -> Double {
-        return number * 180 / .pi
-    }
-    
+    // Function that resets all current stored properties of structure
+    //
     mutating func reset() {
         self.firstNumber = nil
         self.secondNumber = nil

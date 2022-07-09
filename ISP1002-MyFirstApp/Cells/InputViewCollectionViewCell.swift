@@ -9,9 +9,11 @@ import UIKit
 
 class InputViewCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Iboutlets
     @IBOutlet var inputViewLabel: UILabel!
     @IBOutlet var parentView: UIView!
     
+    // MARK: - Cell lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -22,6 +24,7 @@ class InputViewCollectionViewCell: UICollectionViewCell {
         backgroundColor = item.buttonType == .number ? UIColor.lightGray : UIColor.orange
         inputViewLabel.textColor = .white
         inputViewLabel.text = item.rawValue
+        // Updates operation cell background on selection
         if let operation = viewModel.operation,
            item == operation,
            let lastAction = viewModel.lastAction,
