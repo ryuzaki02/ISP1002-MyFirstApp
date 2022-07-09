@@ -7,6 +7,13 @@
 
 import Foundation
 
+protocol CalculatorProtocol {
+    func reloadCollectionView()
+    
+    @discardableResult
+    func updateInputLabel(value: String, append: Bool) -> String
+}
+
 // Enum: To differentiate sub type of Input type
 //
 enum ButtonType {
@@ -17,7 +24,7 @@ enum ButtonType {
 //
 enum InputType: String, CaseIterable {
     case AC = "AC"
-    case PlusMinus = "+/-"
+    case plusMinus = "+/-"
     case remainder = "%"
     case divide = "/"
     case tenPowerX = "10^x"
@@ -74,12 +81,13 @@ struct CalculatorViewModel {
     var inputType: InputType?
     var lastAction: ButtonType?
     var operation: InputType?
+    var delegate: CalculatorProtocol?
     
     // Mutating function to perform selected operation
     // Return: Double type output value
     // Argument: Checks whether single operation on first number or operation on both first and second number
     //
-    mutating func operate(singleOperation: Bool = false) -> Double {
+    mutating private func operate(singleOperation: Bool = false) -> Double {
         guard let firstNumber = firstNumber,
               let operation = operation
         else { return 0 }
@@ -95,7 +103,7 @@ struct CalculatorViewModel {
         switch operation {
         case .AC:
             print("")
-        case .PlusMinus:
+        case .plusMinus:
             value = -firstNumber
         case .remainder:
             value = firstNumber.truncatingRemainder(dividingBy: secondNumber)
@@ -137,9 +145,9 @@ struct CalculatorViewModel {
     // Function that checks whether particular operation is single or not
     // Return : Boolean variable
     //
-    func isSingleOperation() -> Bool {
+    private func isSingleOperation() -> Bool {
         switch operation {
-        case .tenPowerX, .ln, .sin, .cos, .square, .cube, .factorial, .by, .decimal:
+        case .tenPowerX, .ln, .sin, .cos, .square, .cube, .factorial, .by, .decimal, .plusMinus:
             return true
         default:
             return false
@@ -163,17 +171,84 @@ struct CalculatorViewModel {
     // Return: String output value to show
     // Param: Double input value to convert
     //
-    func forTrailingZero(temp: Double) -> String {
+    private func forTrailingZero(temp: Double) -> String {
         return String(format: "%g", temp)
     }
     
-    // Function that resets all current stored properties of structure
+    // Mutating Function that resets all current stored properties of structure
     //
-    mutating func reset() {
+    mutating private func reset() {
         self.firstNumber = nil
         self.secondNumber = nil
         self.operation = nil
         self.inputType = nil
         self.lastAction = nil
+    }
+    
+    // Mutating Function that calculates on basis of current stored properties and user action
+    // Param: inputType on which action can be performed
+    //
+    mutating func calculate(inputType: InputType) {
+        let currentAction = inputType.buttonType
+        if inputType == .AC {
+            delegate?.updateInputLabel(value: "0", append: false)
+            self.reset()
+            delegate?.reloadCollectionView()
+            return
+        } else if inputType == .equals {
+            let output = self.operate()
+            delegate?.updateInputLabel(value: forTrailingZero(temp: output), append: false)
+            self.firstNumber = output
+            delegate?.reloadCollectionView()
+            return
+        }
+        
+        if let lastAction = self.lastAction {
+            if let _ = self.secondNumber {
+                self.lastAction = currentAction
+                if currentAction == .number {
+                    let labelText = delegate?.updateInputLabel(value: inputType.rawValue, append: true)
+                    self.secondNumber = Double(labelText ?? "") ?? 0
+                    return
+                } else if currentAction == .operation {
+                    let output = operate()
+                    delegate?.updateInputLabel(value: forTrailingZero(temp: output), append: false)
+                    delegate?.reloadCollectionView()
+                }
+            }
+            
+            if lastAction == .number {
+                self.lastAction = currentAction
+                if currentAction == .number {
+                    let labelText = delegate?.updateInputLabel(value: inputType.rawValue, append: true)
+                    self.firstNumber = Double(labelText ?? "") ?? 0
+                } else if currentAction == .operation {
+                    self.operation = inputType
+                    if self.isSingleOperation() {
+                        self.lastAction = .number
+                        let output = self.operate(singleOperation: true)
+                        delegate?.updateInputLabel(value: forTrailingZero(temp: output), append: false)
+                    }
+                    delegate?.reloadCollectionView()
+                }
+            } else if lastAction == .operation {
+                self.lastAction = currentAction
+                if currentAction == .number {
+                    let labelText = delegate?.updateInputLabel(value: inputType.rawValue, append: false)
+                    self.secondNumber = Double(labelText ?? "") ?? 0
+                    delegate?.reloadCollectionView()
+                }
+            }
+        } else {
+            if currentAction == .operation {
+                self.lastAction = currentAction
+                self.firstNumber = 0
+                self.inputType = inputType
+            } else if currentAction == .number {
+                self.lastAction = currentAction
+                let labelText = delegate?.updateInputLabel(value: inputType.rawValue, append: false)
+                self.firstNumber = Double(labelText ?? "") ?? 0
+            }
+        }
     }
 }

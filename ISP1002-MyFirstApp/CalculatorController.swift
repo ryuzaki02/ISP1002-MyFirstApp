@@ -22,6 +22,7 @@ class CalculatorController: UIViewController, UICollectionViewDelegate, UICollec
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        calculatorViewModel.delegate = self
         setupCollectionView()
         // Do any additional setup after loading the view.
     }
@@ -36,68 +37,8 @@ class CalculatorController: UIViewController, UICollectionViewDelegate, UICollec
     // MARK: - Collection view delegate methods
     //
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let inputType = calculatorViewModel.items[indexPath.row]
-        let currentAction = inputType.buttonType
-        
-        if inputType == .AC {
-            inputLabel.text = "0"
-            calculatorViewModel.reset()
-            collectionView.reloadData()
-            return
-        } else if inputType == .equals {
-            let output = calculatorViewModel.operate()
-            inputLabel.text = calculatorViewModel.forTrailingZero(temp: output)
-            collectionView.reloadData()
-            return
-        }
-        
-        if let lastAction = calculatorViewModel.lastAction {
-            if let _ = calculatorViewModel.secondNumber {
-                calculatorViewModel.lastAction = currentAction
-                if currentAction == .number {
-                    inputLabel.text?.append(inputType.rawValue)
-                    calculatorViewModel.secondNumber = Double(inputLabel.text ?? "") ?? 0
-                    return
-                } else if currentAction == .operation {
-                    let output = calculatorViewModel.operate()
-                    inputLabel.text = calculatorViewModel.forTrailingZero(temp: output)
-                    collectionView.reloadData()
-                }
-            }
-            
-            if lastAction == .number {
-                calculatorViewModel.lastAction = currentAction
-                if currentAction == .number && inputLabel.text?.count ?? 0 < 16 {
-                    inputLabel.text?.append(inputType.rawValue)
-                    calculatorViewModel.firstNumber = Double(inputLabel.text ?? "") ?? 0
-                } else if currentAction == .operation {
-                    calculatorViewModel.operation = inputType
-                    if calculatorViewModel.isSingleOperation() {
-                        calculatorViewModel.lastAction = .number
-                        let output = calculatorViewModel.operate(singleOperation: true)
-                        inputLabel.text = calculatorViewModel.forTrailingZero(temp: output)
-                    }
-                    collectionView.reloadData()
-                }
-            } else if lastAction == .operation {
-                calculatorViewModel.lastAction = currentAction
-                if currentAction == .number {
-                    inputLabel.text = inputType.rawValue
-                    calculatorViewModel.secondNumber = Double(inputLabel.text ?? "") ?? 0
-                    collectionView.reloadData()
-                }
-            }
-        } else {
-            if currentAction == .operation {
-                calculatorViewModel.lastAction = currentAction
-                calculatorViewModel.firstNumber = 0
-                calculatorViewModel.inputType = inputType
-            } else if currentAction == .number {
-                calculatorViewModel.lastAction = currentAction
-                inputLabel.text = inputType.rawValue
-                calculatorViewModel.firstNumber = Double(inputLabel.text ?? "") ?? 0
-            }
-        }
+        // Calculates action on numbers according to input
+        calculatorViewModel.calculate(inputType: calculatorViewModel.items[indexPath.row])
     }
     
     // MARK: - Collection view data source methods
@@ -121,3 +62,17 @@ class CalculatorController: UIViewController, UICollectionViewDelegate, UICollec
     
 }
 
+extension CalculatorController: CalculatorProtocol {
+    func reloadCollectionView() {
+        collectionView.reloadData()
+    }
+    
+    func updateInputLabel(value: String, append: Bool) -> String {
+        if append {
+            inputLabel.text?.append(value)
+        } else {
+            inputLabel.text = value
+        }
+        return inputLabel.text ?? ""
+    }
+}
