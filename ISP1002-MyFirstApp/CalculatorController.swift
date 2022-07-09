@@ -53,9 +53,16 @@ class CalculatorController: UIViewController, UICollectionViewDelegate, UICollec
         
         if let lastAction = calculatorViewModel.lastAction {
             if let _ = calculatorViewModel.secondNumber {
-                let output = calculatorViewModel.operate()
-                inputLabel.text = calculatorViewModel.forTrailingZero(temp: output)
-                collectionView.reloadData()
+                calculatorViewModel.lastAction = currentAction
+                if currentAction == .number {
+                    inputLabel.text?.append(inputType.rawValue)
+                    calculatorViewModel.secondNumber = Double(inputLabel.text ?? "") ?? 0
+                    return
+                } else if currentAction == .operation {
+                    let output = calculatorViewModel.operate()
+                    inputLabel.text = calculatorViewModel.forTrailingZero(temp: output)
+                    collectionView.reloadData()
+                }
             }
             
             if lastAction == .number {
