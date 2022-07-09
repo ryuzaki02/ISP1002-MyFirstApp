@@ -17,10 +17,18 @@ class InputViewCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Setup Cell
-    func setupCell(item: InputType) {
+    func setupCell(item: InputType, viewModel: CalculatorViewModel) {
         layer.cornerRadius = bounds.size.height / 2
         backgroundColor = item.buttonType == .number ? UIColor.lightGray : UIColor.orange
+        inputViewLabel.textColor = .white
         inputViewLabel.text = item.rawValue
+        if let operation = viewModel.operation,
+           item == operation,
+           let lastAction = viewModel.lastAction,
+            lastAction == .operation {
+            backgroundColor = .white
+            inputViewLabel.textColor = .orange
+        }
     }
     
 }
