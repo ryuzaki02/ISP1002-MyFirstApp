@@ -188,7 +188,7 @@ struct CalculatorViewModel {
     // Mutating Function that calculates on basis of current stored properties and user action
     // Param: inputType on which action can be performed
     //
-    mutating func calculate(inputType: InputType) {
+    mutating func calculate(inputType: InputType, count: Int) {
         let currentAction = inputType.buttonType
         if inputType == .AC {
             delegate?.updateInputLabel(value: "0", append: false)
@@ -206,7 +206,7 @@ struct CalculatorViewModel {
         if let lastAction = self.lastAction {
             if let _ = self.secondNumber {
                 self.lastAction = currentAction
-                if currentAction == .number {
+                if currentAction == .number, count < 15 {
                     let labelText = delegate?.updateInputLabel(value: inputType.rawValue, append: true)
                     self.secondNumber = Double(labelText ?? "") ?? 0
                     return
@@ -219,7 +219,7 @@ struct CalculatorViewModel {
             
             if lastAction == .number {
                 self.lastAction = currentAction
-                if currentAction == .number {
+                if currentAction == .number, count < 15 {
                     let labelText = delegate?.updateInputLabel(value: inputType.rawValue, append: true)
                     self.firstNumber = Double(labelText ?? "") ?? 0
                 } else if currentAction == .operation {

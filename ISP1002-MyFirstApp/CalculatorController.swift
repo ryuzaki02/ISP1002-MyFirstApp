@@ -38,7 +38,7 @@ class CalculatorController: UIViewController, UICollectionViewDelegate, UICollec
     //
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Calculates action on numbers according to input
-        calculatorViewModel.calculate(inputType: calculatorViewModel.items[indexPath.row])
+        calculatorViewModel.calculate(inputType: calculatorViewModel.items[indexPath.row], count: inputLabel.text?.count ?? 0)
     }
     
     // MARK: - Collection view data source methods
